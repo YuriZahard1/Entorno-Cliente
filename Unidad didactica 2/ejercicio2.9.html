@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        let partidas = 0
+        let perdidas = 0
+        let ganadas = 0
+        let empates = 0
+        do {
+            let jugador = prompt('Elija su opcion: Piedra, Papel o Tijera')
+            if (jugador === null) {
+                break;
+            }
+            let maquina = Math.floor(Math.random() * 3) + 1
+            switch (jugador) {
+                case 'Piedra':
+                    if (maquina == 2) {
+                        alert('La maquina ha sacado papel, Has perdido!')
+                        perdidas++
+                    } else if (maquina == 3) {
+                        alert('La maquina ha sacado tijera, Has ganado!')
+                        ganadas++
+                    } else {
+                        alert('La maquina ha sacado piedra, Empate!')
+                        empates++
+                    }
+                    break;
+                case 'Papel':
+                    if (maquina == 2) {
+                        alert('La maquina ha sacado papel, Empate!')
+                        empates++
+                    } else if (maquina == 3) {
+                        alert('La maquina ha sacado tijera, Has perdido!')
+                        perdidas++
+                    } else {
+                        alert('La maquina ha sacado piedra, Has ganado!')
+                        ganadas++
+                    }
+                    break;
+                case 'Tijera':
+                    if (maquina == 2) {
+                        alert('La maquina ha sacado papel, Has ganado!')
+                        ganadas++
+                    } else if (maquina == 3) {
+                        alert('La maquina ha sacado tijera, Empate!')
+                        empates++
+                    } else {
+                        alert('La maquina ha sacado piedra, Has perdido!')
+                        perdidas++
+                    }
+                    break;
+                default:
+                    alert('Opcion incorrecta')
+                    continue
+                    break;
+            }
+            partidas++
+        } while (confirm('Jugar de nuevo'))
+        document.write("Partidas jugadas: " + partidas + "<br>");
+        document.write("Partidas ganadas: " + ganadas + "<br>");
+        document.write("Partidas perdidas: " + perdidas + "<br>");
+        document.write("Partidas empatadas: " + empates);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        let numero = prompt('Dime un numero')
+        let integer = parseInt(numero)
+
+        if (isNaN(integer)) {
+            alert('El valor introducido no es valido')
+            exit
+        }
+
+        let resultado = evenOdd(integer)
+        alert("El numero " + integer + " es " + resultado)
+
+        if (numeroPrimo(integer) == true) {
+            alert('El numero introducido es primo')
+        } else {
+            alert('El numero introducido no es primo')
+        }
+
+        function evenOdd(integer) {
+            if (integer % 2 == 0) {
+                return "par";
+            } else {
+                return "impar";
+            }
+        }
+
+        function numeroPrimo(n) {
+            for (i = 2; i <= n / 2; i++) {
+                if (n % i == 0) {
+                    return false
+                }
+            }
+            return true
+        }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
