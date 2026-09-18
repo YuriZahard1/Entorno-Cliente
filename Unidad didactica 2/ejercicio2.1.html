@@ -7,17 +7,17 @@
     <title>Exercici 2.1</title>
     <script type="text/javascript">
 
-        var number = prompt("Introduir un nombre sencer i es mostrarà el seu factorial");
+        var number = prompt("introduce un numero entero para conocer su factorial");
 
         var integer = parseInt(number);
 
         if (isNaN(integer)) {
-            alert("El número introduït no és correcte");
+            alert("El numero introducido no es correcto");
             exit;
         }
 
         if (integer <= 0) {
-            alert("El número introduït ha de ser major que 0");
+            alert("El número introducido ha de ser mayor que 0");
             exit;
         }
 
@@ -26,7 +26,7 @@
         for (var i = 2; i < integer; i++) {
             result *= i;
         }
-        alert("El factorial de" + integer + " és " + result);
+        alert("El factorial de" + integer + " es " + result);
     </script>
 
 </head>

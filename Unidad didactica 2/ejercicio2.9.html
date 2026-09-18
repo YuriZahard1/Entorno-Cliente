@@ -15,41 +15,41 @@
             if (jugador === null) {
                 break;
             }
-            let maquina = Math.floor(Math.random() * 3) + 1
+            let eleccionMaquina = Math.floor(Math.random() * 3) + 1
             switch (jugador) {
                 case 'Piedra':
-                    if (maquina == 2) {
-                        alert('La maquina ha sacado papel, Has perdido!')
+                    if (eleccionMaquina == 2) {
+                        alert('La eleccionMaquina ha sacado papel, Has perdido!')
                         perdidas++
-                    } else if (maquina == 3) {
-                        alert('La maquina ha sacado tijera, Has ganado!')
+                    } else if (eleccionMaquina == 3) {
+                        alert('La eleccionMaquina ha sacado tijera, Has ganado!')
                         ganadas++
                     } else {
-                        alert('La maquina ha sacado piedra, Empate!')
+                        alert('La eleccionMaquina ha sacado piedra, Empate!')
                         empates++
                     }
                     break;
                 case 'Papel':
-                    if (maquina == 2) {
-                        alert('La maquina ha sacado papel, Empate!')
+                    if (eleccionMaquina == 2) {
+                        alert('La eleccionMaquina ha sacado papel, Empate!')
                         empates++
-                    } else if (maquina == 3) {
-                        alert('La maquina ha sacado tijera, Has perdido!')
+                    } else if (eleccionMaquina == 3) {
+                        alert('La eleccionMaquina ha sacado tijera, Has perdido!')
                         perdidas++
                     } else {
-                        alert('La maquina ha sacado piedra, Has ganado!')
+                        alert('La eleccionMaquina ha sacado piedra, Has ganado!')
                         ganadas++
                     }
                     break;
                 case 'Tijera':
-                    if (maquina == 2) {
-                        alert('La maquina ha sacado papel, Has ganado!')
+                    if (eleccionMaquina == 2) {
+                        alert('La eleccionMaquina ha sacado papel, Has ganado!')
                         ganadas++
-                    } else if (maquina == 3) {
-                        alert('La maquina ha sacado tijera, Empate!')
+                    } else if (eleccionMaquina == 3) {
+                        alert('La eleccionMaquina ha sacado tijera, Empate!')
                         empates++
                     } else {
-                        alert('La maquina ha sacado piedra, Has perdido!')
+                        alert('La eleccionMaquina ha sacado piedra, Has perdido!')
                         perdidas++
                     }
                     break;
