@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestor de DNIs con Intervalos</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    .resultado { margin-top: 15px; padding: 10px; background-color: #f0f0f0; }
+    .error { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Lector de DNIs automático</h2>
+  <p>Cada 10 segundos se solicitará un DNI. Introduce <strong>-1</strong> para terminar.</p>
+  
+  <div id="salida" class="resultado">Esperando primera lectura...</div>
+
+  <script>
+    const LETRAS_DNI = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
+    
+    const dnisValidos = [];
+    
+    const elementoSalida = document.getElementById("salida");
+
+    const calcularLetra = (numero) => LETRAS_DNI[numero % 23];
+
+    function pedirDNI() {
+      const entrada = prompt("Introduce un número de DNI (o -1 para salir):");
+
+      if (entrada === null) return;
+
+      const entradaLimpia = entrada.trim();
+
+      if (entradaLimpia === "-1") {
+        detenerProceso("Proceso finalizado por el usuario.");
+        return;
+      }
+
+      const esNumero = /^\d{1,8}$/.test(entradaLimpia);
+
+      if (!esNumero) {
+        detenerProceso("¡Error! Debes introducir un número de DNI válido (solo dígitos).");
+        return;
+      }
+
+      const numeroDNI = parseInt(entradaLimpia, 10);
+      const letra = calcularLetra(numeroDNI);
+      const dniCompleto = `${numeroDNI.toString().padStart(8, '0')}-${letra}`;
+
+      dnisValidos.push(dniCompleto);
+      
+      elementoSalida.innerHTML = `<p>DNI guardado: <strong>${dniCompleto}</strong>. Próxima lectura en 10 segundos...</p>`;
+    }
+
+    function detenerProceso(mensaje) {
+      clearInterval(intervaloID); // Detiene las peticiones periódicas
+      
+      let htmlFinal = `<p class="${mensaje.includes('Error') ? 'error' : ''}">${mensaje}</p>`;
+      
+      if (dnisValidos.length > 0) {
+        htmlFinal += "<h3>DNIs introducidos correctamente:</h3><ul>";
+        dnisValidos.forEach(dni => {
+          htmlFinal += `<li>${dni}</li>`;
+        });
+        htmlFinal += "</ul>";
+      } else {
+        htmlFinal += "<p>No se ha introducido ningún DNI válido.</p>";
+      }
+
+      elementoSalida.innerHTML = htmlFinal;
+    }
+
+    pedirDNI();
+
+    const intervaloID = setInterval(pedirDNI, 10000);
+  </script>
+
+</body>
+</html>
