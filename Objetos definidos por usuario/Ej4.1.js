@@ -1,4 +1,3 @@
-// 1. Clase Articulo
 class Articulo {
   #nombre;
   #precio;
@@ -10,7 +9,7 @@ class Articulo {
     this.#descuento = descuento;
   }
 
-  // Getters para acceder a las propiedades privadas
+  // Getters
   get nombre() {
     return this.#nombre;
   }
@@ -20,9 +19,19 @@ class Articulo {
   get descuento() {
     return this.#descuento;
   }
+
+  // Setters
+  set nombre(nuevoNombre) {
+    this.#nombre = nuevoNombre;
+  }
+  set precio(nuevoPrecio) {
+    this.#precio = nuevoPrecio;
+  }
+  set descuento(nuevoDescuento) {
+    this.#descuento = nuevoDescuento;
+  }
 }
 
-// 2. Clase ELement (relaciona un artículo con su cantidad)
 class ELement {
   #articulo;
   #cantidad;
@@ -39,9 +48,16 @@ class ELement {
   get cantidad() {
     return this.#cantidad;
   }
+
+  // Setters
+  set articulo(nuevoArticulo) {
+    this.#articulo = nuevoArticulo;
+  }
+  set cantidad(nuevaCantidad) {
+    this.#cantidad = nuevaCantidad;
+  }
 }
 
-// 3. Clase Cliente
 class Cliente {
   #nombre;
   #address;
@@ -55,6 +71,7 @@ class Cliente {
     this.#nif = nif;
   }
 
+  // Getters
   get nombre() {
     return this.#nombre;
   }
@@ -67,9 +84,22 @@ class Cliente {
   get nif() {
     return this.#nif;
   }
+
+  // Setters
+  set nombre(nuevoNombre) {
+    this.#nombre = nuevoNombre;
+  }
+  set address(nuevaAddress) {
+    this.#address = nuevaAddress;
+  }
+  set phone(nuevoPhone) {
+    this.#phone = nuevoPhone;
+  }
+  set nif(nuevoNif) {
+    this.#nif = nuevoNif;
+  }
 }
 
-// 4. Clase Empresa
 class Empresa {
   #nombre;
   #address;
@@ -83,6 +113,7 @@ class Empresa {
     this.#nif = nif;
   }
 
+  // Getters
   get nombre() {
     return this.#nombre;
   }
@@ -95,9 +126,22 @@ class Empresa {
   get nif() {
     return this.#nif;
   }
+
+  // Setters
+  set nombre(nuevoNombre) {
+    this.#nombre = nuevoNombre;
+  }
+  set address(nuevaAddress) {
+    this.#address = nuevaAddress;
+  }
+  set phone(nuevoPhone) {
+    this.#phone = nuevoPhone;
+  }
+  set nif(nuevoNif) {
+    this.#nif = nuevoNif;
+  }
 }
 
-// 5. Clase Factura (Corregida con empresa, cliente, elementos y los métodos pedidos)
 class Factura {
   #empresa;
   #cliente;
@@ -109,33 +153,68 @@ class Factura {
   constructor(empresa, cliente, tipoIva, formaPago) {
     this.#empresa = empresa;
     this.#cliente = cliente;
-    this.#elementos = []; // Array que almacenará objetos de la clase ELement
+    this.#elementos = [];
     this.#importeTotal = 0;
     this.#tipoIva = tipoIva;
     this.#formaPago = formaPago;
   }
 
-  // Método para añadir elementos a la factura
+  // Getters
+  get empresa() {
+    return this.#empresa;
+  }
+  get cliente() {
+    return this.#cliente;
+  }
+  get elementos() {
+    return this.#elementos;
+  }
+  get importeTotal() {
+    return this.#importeTotal;
+  }
+  get tipoIva() {
+    return this.#tipoIva;
+  }
+  get formaPago() {
+    return this.#formaPago;
+  }
+
+  // Setters
+  set empresa(nuevaEmpresa) {
+    this.#empresa = nuevaEmpresa;
+  }
+  set cliente(nuevoCliente) {
+    this.#cliente = nuevoCliente;
+  }
+  set tipoIva(nuevoIva) {
+    this.#tipoIva = nuevoIva;
+  }
+  set formaPago(nuevaFormaPago) {
+    this.#formaPago = nuevaFormaPago;
+  }
+
   agregarElemento(elemento) {
     this.#elementos.push(elemento);
   }
 
-  // Método que calcula el importe total y actualiza la propiedad correspondiente
   calcularImporteTotal() {
     let subtotal = 0;
 
     for (let i = 0; i < this.#elementos.length; i++) {
       let item = this.#elementos[i];
-      // Multiplica el precio del artículo por la cantidad de unidades
-      subtotal += item.articulo.precio * item.cantidad;
+      let articulo = item.articulo;
+
+      // Aplicamos el descuento del artículo (en porcentaje) al precio unitario
+      let precioConDescuento =
+        articulo.precio - articulo.precio * (articulo.descuento / 100);
+
+      subtotal += precioConDescuento * item.cantidad;
     }
 
-    // Aplicar el IVA al subtotal y actualizar la propiedad privada
     this.#importeTotal = subtotal + subtotal * (this.#tipoIva / 100);
     return this.#importeTotal;
   }
 
-  // Método que muestra por pantalla el importe total
   mostrarImporteTotal() {
     console.log(
       `El importe total de la factura es: ${this.#importeTotal.toFixed(2)} €`,
@@ -143,7 +222,6 @@ class Factura {
   }
 }
 
-// --- Array de clientes de ejemplo que ya tenías ---
 let clientes = [
   {
     nombre: "Carlos",
@@ -165,9 +243,6 @@ let clientes = [
   },
 ];
 
-// --- Ejemplo de uso completo ---
-
-// Creamos los datos de la Empresa
 const miEmpresa = new Empresa(
   "Tecnología SL",
   "Calle Principal 10",
@@ -175,7 +250,6 @@ const miEmpresa = new Empresa(
   "B98765432",
 );
 
-// Cogemos un cliente del array que ya tenías y creamos el objeto Cliente
 const datosCarlos = clientes[0];
 const unCliente = new Cliente(
   datosCarlos.nombre,
@@ -184,18 +258,14 @@ const unCliente = new Cliente(
   datosCarlos.nif,
 );
 
-// Creamos artículos
-const art1 = new Articulo("Monitor 24 pulgadas", 150, 0);
+// Artículo con 10% de descuento de prueba
+const art1 = new Articulo("Monitor 24 pulgadas", 150, 10);
 const art2 = new Articulo("Cable HDMI", 10, 0);
 
-// Creamos la factura (pasando la empresa, el cliente, 21% de IVA y forma de pago)
 const miFactura = new Factura(miEmpresa, unCliente, 21, "Efectiu");
 
-// Añadimos elementos a la factura (usando tu clase ELement)
-miFactura.agregarElemento(new ELement(art1, 2)); // 2 monitores a 150€ = 300€
-miFactura.agregarElemento(new ELement(art2, 3)); // 3 cables HDMI a 10€ = 30€
-// Subtotal = 330 € + 21% IVA (69.30 €) = 399.30 €
+miFactura.agregarElemento(new ELement(art1, 2));
+miFactura.agregarElemento(new ELement(art2, 3));
 
-// Ejecutamos los métodos requeridos
 miFactura.calcularImporteTotal();
-miFactura.mostrarImporteTotal(); // Imprime en consola: El importe total de la factura es: 399.30 €
+miFactura.mostrarImporteTotal();
