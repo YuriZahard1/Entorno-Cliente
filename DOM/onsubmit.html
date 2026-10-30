@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 6 - Validación y Confirmación</title>
+  </head>
+  <body>
+    <form
+      action="procesar.php"
+      method="GET"
+      onsubmit="return validarYConfirmar();"
+    >
+      <label for="caja6">Texto:</label>
+      <input type="text" id="caja6" name="mensaje" />
+
+      <!-- Botón de tipo submit -->
+      <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+      function validarYConfirmar() {
+        let valor = document.getElementById("caja6").value;
+
+        // 1. Comprobamos si está vacío (quitando espacios en blanco por si acaso)
+        if (valor.trim() === "") {
+          alert(
+            "El formulario está vacío. Por favor, escribe algo antes de enviar.",
+          );
+          return false; // Detiene el envío
+        }
+
+        // 2. Si no está vacío, mostramos el confirm
+        let respuesta = confirm(
+          "¿Estás seguro de que deseas enviar el formulario?",
+        );
+
+        return respuesta; // Si pulsa Aceptar devuelve true (se envía), si pulsa Cancelar devuelve false (se cancela)
+      }
+    </script>
+  </body>
+</html>

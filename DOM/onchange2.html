@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 3</title>
+  </head>
+  <body>
+    <select id="desplegable" onchange="mostrarMensaje(this)">
+      <option value="" disabled selected>Selecciona una opción</option>
+      <option value="opcion1">Opción 1</option>
+      <option value="opcion2">Opción 2</option>
+      <option value="opcion3">Opción 3</option>
+    </select>
+
+    <script>
+      function mostrarMensaje(select) {
+        alert("Has seleccionado la opción: " + select.value);
+      }
+    </script>
+  </body>
+</html>

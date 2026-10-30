@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 4</title>
+  </head>
+  <body>
+    <input
+      type="text"
+      id="caja4"
+      onfocus="fondoAmarillo(this)"
+      onblur="fondoBlanco(this)"
+    />
+
+    <script>
+      function fondoAmarillo(elemento) {
+        elemento.style.backgroundColor = "yellow";
+      }
+
+      function fondoBlanco(elemento) {
+        elemento.style.backgroundColor = "white";
+      }
+    </script>
+  </body>
+</html>

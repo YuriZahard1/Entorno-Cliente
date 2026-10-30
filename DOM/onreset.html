@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 7</title>
+  </head>
+  <body>
+    <!-- El evento onreset se activa en el formulario cuando se pulsa el botón de reset -->
+    <form id="miFormulario" onreset="avisoReset()">
+      <label for="caja7">Texto:</label>
+      <input
+        type="text"
+        id="caja7"
+        name="texto"
+        value="Texto inicial por defecto"
+      />
+
+      <br /><br />
+
+      <!-- Botón de tipo reset nativo para limpiar el formulario -->
+      <input type="reset" value="Reiniciar Formulario" />
+    </form>
+
+    <script>
+      function avisoReset() {
+        let reset = confirm(
+          "¡El formulario ha sido reseteado y los valores han vuelto a su estado original!",
+        );
+      }
+    </script>
+  </body>
+</html>

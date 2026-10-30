@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Titulo</title>
+    <script type="text/javascript">
+      window.onload = function () {
+        // 1. Botón para añadir empleado
+        document
+          .getElementById("addEmpButton")
+          .addEventListener("click", (e) => {
+            anyadirTabla();
+          });
+
+        // 2. Delegación de eventos en la tabla para borrar filas dinámicamente
+        document
+          .getElementById("employeetable")
+          .addEventListener("click", (e) => {
+            // Comprobamos si el elemento clicado es un enlace con la clase "delete"
+            if (e.target.tagName === "A") {
+              e.preventDefault(); // Evita que la página suba arriba del todo por el href="#"
+
+              // Busca la fila (tr) más cercana y la elimina
+              let fila = e.target.closest("tr");
+              fila.remove();
+            }
+          });
+      };
+
+      function anyadirTabla() {
+        let list = document
+          .getElementById("employeetable")
+          .getElementsByTagName("tbody")[0];
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let salary = document.getElementById("salary").value;
+
+        // Añadimos la nueva fila incluyendo la clase "delete" en el enlace
+        list.innerHTML += `
+          <tr>
+            <td>${name}</td>
+            <td>${email}</td>
+            <td>${salary}</td>
+            <td><a href="#">Delete</a></td>
+          </tr>`;
+
+        // Limpiar los inputs
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("salary").value = "";
+      }
+    </script>
+  </head>
+  <body>
+    <center>
+      <br /><br />
+      Agregar nuevo empleado <br /><br />
+      name: <input type="text" name="name" id="name" />&nbsp;&nbsp; email:
+      <input type="text" name="email" id="email" /> &nbsp;&nbsp; salary:
+      <input type="text" name="salary" id="salary" value="" /> <br /><br />
+      <button id="addEmpButton">Submit</button>
+      <br /><br />
+      <hr />
+      <br /><br />
+
+      <table id="employeetable" border="1" cellpadding="5" cellspacing="">
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;</th>
+          </tr>
+          <tr>
+            <td>Tom</td>
+            <td>[email protected].com</td>
+            <td>5000</td>
+            <td><a href="#">Delete</a></td>
+          </tr>
+          <tr>
+            <td>Jerry</td>
+            <td>[email protected].com</td>
+            <td>8000</td>
+            <td><a href="#">Delete</a></td>
+          </tr>
+          <tr>
+            <td>Bob</td>
+            <td>[email protected].com</td>
+            <td>10000</td>
+            <td><a href="#">Delete</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+  </body>
+</html>

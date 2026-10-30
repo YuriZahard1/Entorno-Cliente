@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript">
+      window.onload = () => {
+        let parrafos = document.querySelectorAll("p");
+        Array.from(parrafos).forEach((element) => {
+          console.log(element.innerHTML);
+        });
+
+        let parrafosClase1 = document.querySelectorAll("p.clase1");
+        Array.from(parrafosClase1).forEach((element) => {
+          console.log(element.innerHTML);
+        });
+      };
+      document.addEventListener("DOMContentLoaded", () => {
+        let boton = document.querySelector("input[type='button']");
+        let contenedor = document.querySelector("div");
+
+        let actual = null;
+        let direccion = 1; // 1 para ir hacia adelante, -1 para ir hacia atrás
+
+        boton.addEventListener("click", () => {
+          if (actual === null) {
+            // Primer clic: empezamos en el primer hijo
+            actual = contenedor.firstElementChild;
+          } else {
+            // Buscamos el siguiente elemento según la dirección actual
+            let vecino =
+              direccion === 1
+                ? actual.nextElementSibling
+                : actual.previousElementSibling;
+
+            if (vecino) {
+              // Si existe el elemento vecino, avanzamos hacia él
+              actual = vecino;
+            } else {
+              // Si llegamos a un extremo (principio o final), invertimos la dirección
+              direccion *= -1; // Cambia de 1 a -1, o de -1 a 1
+
+              // Damos el paso en la nueva dirección
+              actual =
+                direccion === 1
+                  ? actual.nextElementSibling
+                  : actual.previousElementSibling;
+            }
+          }
+
+          // Mostramos el texto actual
+          if (actual) {
+            console.log(actual.innerHTML);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <p class="clase1">texto 1</p>
+      <p class="clase2">texto 2</p>
+      <p class="clase1">texto 3</p>
+      <p class="clase2">texto 4</p>
+      <p class="clase1">texto 5</p>
+      <p class="clase2">texto 6</p>
+      <p class="clase1">texto 7</p>
+      <p class="clase2">texto 8</p>
+      <p class="clase1">texto 9</p>
+      <p class="clase2">texto 10</p>
+    </div>
+    <input type="button" value="Haz click" />
+  </body>
+</html>

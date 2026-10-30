@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Exercici 4.3</title>
+    <script type="text/javascript">
+      let list = null;
+      window.onload = function () {
+        list = document
+          .getElementById("boton1")
+          .addEventListener("click", (e) => {
+            addLastPosition();
+          });
+        list = document
+          .getElementById("boton2")
+          .addEventListener("click", (e) => {
+            addPositionX();
+          });
+        list = document
+          .getElementById("boton3")
+          .addEventListener("click", (e) => {
+            replacePositionX();
+          });
+        list = document
+          .getElementById("boton4")
+          .addEventListener("click", (e) => {
+            removePositionX();
+          });
+        list = document
+          .getElementById("boton5")
+          .addEventListener("click", (e) => {
+            empty();
+          });
+        list = document
+          .getElementById("boton6")
+          .addEventListener("click", (e) => {
+            clonar();
+          });
+        list = document
+          .getElementById("boton7")
+          .addEventListener("click", (e) => {
+            mover();
+          });
+      };
+      function addLastPosition() {
+        const quest = prompt("texto a poner");
+        list = document.getElementById("list");
+        list.innerHTML += `<li>  ${quest}  </li>`;
+      }
+      function addPositionX() {
+        const quest = prompt("texto a poner");
+        const pos = Number(prompt("Que posicion (numero)?"));
+        list = document.getElementById("list");
+        const nuevoElemento = document.createElement("li");
+        nuevoElemento.textContent = quest;
+        if (
+          pos - 1 >= 0 &&
+          pos - 1 < document.getElementById("list").children.length
+        ) {
+          // Inserta antes del elemento que esté en esa posición
+          list.insertBefore(nuevoElemento, list.children[pos - 1]);
+        } else {
+          // Si no existe o es mayor, lo añade al final
+          list.appendChild(nuevoElemento);
+        }
+      }
+
+      function replacePositionX() {
+        const quest = prompt("texto a poner");
+        const pos = Number(prompt("Que posicion (numero)?"));
+        list = document.getElementById("list");
+        const nuevoElemento = document.createElement("li");
+        nuevoElemento.textContent = quest;
+        // Inserta antes del elemento que esté en esa posición
+        list.replaceChild(nuevoElemento, list.children[pos - 1]);
+      }
+      function removePositionX() {
+        const pos = Number(prompt("Que posicion quieres borrar(numero)?"));
+        list = document.getElementById("list");
+        // Inserta antes del elemento que esté en esa posición
+        list.children[pos - 1].remove();
+      }
+      function empty() {
+        list = document.getElementById("list");
+        list.remove();
+      }
+      function clonar() {
+        const pos = Number(prompt("Que posicion quieres clonar(numero)?"));
+        list = document.getElementById("list");
+        const elementoClonado = list.children[pos - 1].cloneNode(true);
+        list.appendChild(elementoClonado);
+      }
+      function mover() {
+        const posIni = Number(prompt("Que posicion quieres mover(numero)?"));
+        const nuevaPos = Number(
+          prompt("A que posicion quieres mover(numero)?"),
+        );
+        list = document.getElementById("list");
+        const elemento1 = list.children[posIni - 1];
+        const elemento2 = list.children[nuevaPos - 1];
+
+        list.replaceChild(elemento1, elemento2);
+        list.replaceChild(elemento2, elemento1);
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <ol id="list">
+        <li>Lorem ipsum dolor sit amet</li>
+        <li>Consectetuer adipiscing elit</li>
+        <li>Sed mattis enim vitae orci</li>
+        <li>Phasellus libero</li>
+        <li>Maecenas nisl arcu</li>
+      </ol>
+    </div>
+    <input id="boton1" type="button" value="Afegir element ultima posicion" />
+    <input id="boton2" type="button" value="Afegir element en posicion x" />
+    <input
+      id="boton3"
+      type="button"
+      value="Substituir element de la posicion x"
+    />
+    <input id="boton4" type="button" value="Eliminar element de la posicion" />
+
+    <input id="boton5" type="button" value="Buidar llista" />
+    <input id="boton6" type="button" value="Clonar elemento de pos x" />
+    <input id="boton7" type="button" value="Mover" />
+  </body>
+</html>

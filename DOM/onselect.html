@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 5</title>
+  </head>
+  <body>
+    <input
+      type="text"
+      id="caja5"
+      value="Selecciona una parte de este texto"
+      onselect="mostrarSeleccion(this)"
+      size="40"
+    />
+    <p>Texto seleccionado: <span id="resultado"></span></p>
+
+    <script>
+      function mostrarSeleccion(elemento) {
+        // Obtenemos el texto que va desde la posición de inicio hasta la de fin de la selección
+        let textoSeleccionado = elemento.value.substring(
+          elemento.selectionStart,
+          elemento.selectionEnd,
+        );
+        document.getElementById("resultado").innerText = textoSeleccionado;
+      }
+    </script>
+  </body>
+</html>
