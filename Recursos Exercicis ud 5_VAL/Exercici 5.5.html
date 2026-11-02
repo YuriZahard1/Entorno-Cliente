@@ -1,10 +1,107 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear</title>
+    <script type="text/javascript">
+      window.onload = function () {
+        let tablaCreada = false;
+        let crear = document
+          .getElementById("CrearTabla")
+          .addEventListener("click", (e) => {
+            if (!tablaCreada) {
+              crearTabla();
+              tablaCreada = true;
+              document.getElementById("EliminarFila").disabled = false;
+              document.getElementById("EliminarColumna").disabled = false;
+            }
+          });
+        let eliminarFila = document
+          .getElementById("EliminarFila")
+          .addEventListener("click", (e) => {
+            eliminaFila();
+          });
+        let eliminarColumna = document
+          .getElementById("EliminarColumna")
+          .addEventListener("click", (e) => {
+            eliminaColumna();
+          });
 
-    </head>
-    <body>
-		<input type="button" onclick="makeTable();" value="Crear Taula" >
-	</body>
+        function eliminaFila() {
+          if (tablaCreada) {
+            let quest = Number(prompt("Que fila desea usted eliminar"));
+            let fila = document.querySelector("table");
+            fila.children[quest].remove();
+          }
+        }
+        function eliminaColumna() {
+          if (tablaCreada) {
+            let quest = Number(prompt("Que columna desea usted eliminar"));
+            let tabla = document.querySelector("table");
+            for (let i = 0; i < tabla.rows.length; i++) {
+              // Si la fila tiene esa celda, la eliminamos
+              if (tabla.rows[i].cells[quest]) {
+                tabla.rows[i].deleteCell(quest);
+              }
+            }
+          }
+        }
+
+        function esPrimo(num) {
+          for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) return false;
+          }
+          return true;
+        }
+        function crearTabla() {
+          let tabla = document.createElement("table");
+          for (let fila = 0; fila <= 10; fila++) {
+            let tr = document.createElement("tr");
+
+            for (let col = 0; col <= 10; col++) {
+              let td = document.createElement("td");
+              if (fila === 0 && col === 0) {
+                td.style.backgroundColor = "white";
+              } else if (fila === 0) {
+                td.textContent = col;
+                td.style.backgroundColor = "blue";
+                td.style.color = "white"; // Texto blanco para que se lea mejor en fondo azul
+                td.style.fontWeight = "bold";
+              } else if (col === 0) {
+                td.textContent = fila;
+                td.style.backgroundColor = "blue";
+                td.style.color = "white";
+                td.style.fontWeight = "bold";
+              } else {
+                let numeroInterior = (fila - 1) * 10 + col;
+                td.textContent = numeroInterior;
+                if (esPrimo(numeroInterior)) {
+                  td.style.backgroundColor = "yellow";
+                }
+              }
+              tr.appendChild(td);
+            }
+            tabla.appendChild(tr);
+          }
+          document.body.appendChild(tabla);
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <input type="button" id="CrearTabla" value="Crear Tabla" />
+    <input
+      type="button"
+      id="EliminarFila"
+      disabled="disabled"
+      value="Eliminar fila"
+    />
+    <input
+      type="button"
+      id="EliminarColumna"
+      disabled="disabled"
+      value="Eliminar columna"
+    />
+  </body>
 </html>
